@@ -51,23 +51,31 @@ export default {
       <input type="text" placeholder="Cerca film" v-model="inputValue" />
       <button @click="getApi">send</button>
     </div>
+
+    <ul class="ul-style" v-for="dati in film">
+      <img
+        :src="`https://image.tmdb.org/t/p/w500${dati.imgPath}`"
+        alt="immagine non trovata :("
+      />
+      <li><span class="fw-bold">nome: </span> {{ dati.name }}</li>
+      <li>
+        <span class="fw-bold">nome originale: </span> {{ dati.originalName }}
+      </li>
+      <li><span class="fw-bold">lingua: </span> {{ dati.lang }}</li>
+      <li><span class="fw-bold">voto: </span> {{ dati.rating }}</li>
+    </ul>
   </div>
-  <ul v-for="dati in film">
-    <img
-      :src="`https://image.tmdb.org/t/p/w500${dati.imgPath}`"
-      alt="immagine non trovata :("
-    />
-    <li><span class="fw-bold">nome: </span> {{ dati.name }}</li>
-    <li>
-      <span class="fw-bold">nome originale: </span> {{ dati.originalName }}
-    </li>
-    <li><span class="fw-bold">lingua: </span> {{ dati.lang }}</li>
-    <li><span class="fw-bold">voto: </span> {{ dati.rating }}</li>
-  </ul>
 </template>
 <style scoped>
 li {
   list-style: none;
+}
+
+.ul-style {
+  min-width: 600px;
+  border: 0.5px solid rgba(0, 0, 0, 0.374);
+  padding: 50px;
+  background-color: rgba(169, 169, 169, 0.249);
 }
 
 .m-5 {
@@ -78,5 +86,9 @@ li {
   margin: 0 auto;
   align-items: center;
   justify-content: center;
+}
+
+.m-5 > * {
+  margin-bottom: 15px;
 }
 </style>
