@@ -4,6 +4,7 @@ export default {
   data() {
     return {
       inputValue: "ritorno al futuro",
+      film: [],
     };
   },
   methods: {
@@ -19,7 +20,18 @@ export default {
           const originalName = data.original_title;
           const lang = data.original_language;
           const rating = data.vote_average;
-          console.log(name, originalName, lang, rating);
+          this.film.push({
+            name,
+            originalName,
+            lang,
+            rating,
+          });
+          console.log(
+            name + ",",
+            "nome originale: " + originalName + ",",
+            "lingua: " + lang + ",",
+            "voto: " + rating
+          );
         });
     },
   },
@@ -32,5 +44,15 @@ export default {
   <h1>Boolflix</h1>
   <input type="text" placeholder="Cerca film" v-model="inputValue" />
   <button @click="getApi">send</button>
+  <ul v-for="dati in film">
+    <li>nome: {{ dati.name }}</li>
+    <li>nome originale: {{ dati.originalName }}</li>
+    <li>lingua: {{ dati.lang }}</li>
+    <li>voto: {{ dati.rating }}</li>
+  </ul>
 </template>
-<style></style>
+<style>
+li {
+  list-style: none;
+}
+</style>
