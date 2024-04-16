@@ -34,18 +34,9 @@ export default {
               rating,
               imgPath,
             });
-            console.log(
-              name + ",",
-              "nome originale: " + originalName + ",",
-              "lingua: " + lang + ",",
-              "voto: " + rating
-            );
           }
         });
     },
-  },
-  mounted() {
-    this.getApi();
   },
 };
 </script>
