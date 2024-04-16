@@ -3,7 +3,7 @@ import axios from "axios";
 export default {
   data() {
     return {
-      inputValue: "ritorno al futuro",
+      inputValue: "",
       film: [],
     };
   },
@@ -14,24 +14,28 @@ export default {
           `https://api.themoviedb.org/3/search/movie?api_key=a9f93794d83843cad47d4bcbc4f86888&query=${this.inputValue}`
         )
         .then((res) => {
-          console.log(res);
-          const data = res.data.results[0];
-          const name = data.title;
-          const originalName = data.original_title;
-          const lang = data.original_language;
-          const rating = data.vote_average;
-          this.film.push({
-            name,
-            originalName,
-            lang,
-            rating,
-          });
-          console.log(
-            name + ",",
-            "nome originale: " + originalName + ",",
-            "lingua: " + lang + ",",
-            "voto: " + rating
-          );
+          for (let i = 0; i < 20; i++) {
+            console.log(res);
+            const data = res.data.results[i];
+            const name = data.title;
+            const originalName = data.original_title;
+            const lang = data.original_language;
+            const rating = data.vote_average;
+            const imgPath = data.backdrop_path;
+            this.film.push({
+              name,
+              originalName,
+              lang,
+              rating,
+              imgPath,
+            });
+            console.log(
+              name + ",",
+              "nome originale: " + originalName + ",",
+              "lingua: " + lang + ",",
+              "voto: " + rating
+            );
+          }
         });
     },
   },
@@ -41,18 +45,33 @@ export default {
 };
 </script>
 <template>
-  <h1>Boolflix</h1>
-  <input type="text" placeholder="Cerca film" v-model="inputValue" />
-  <button @click="getApi">send</button>
+  <div class="m-5">
+    <h1 class="col-auto">Boolflix</h1>
+    <div>
+      <input type="text" placeholder="Cerca film" v-model="inputValue" />
+      <button @click="getApi">send</button>
+    </div>
+  </div>
   <ul v-for="dati in film">
-    <li>nome: {{ dati.name }}</li>
+    <img :src="`https://image.tmdb.org/t/p/w500${dati.imgPath}`" alt="" />
+    <li><span class="fw-bold">nome: </span> {{ dati.name }}</li>
     <li>nome originale: {{ dati.originalName }}</li>
     <li>lingua: {{ dati.lang }}</li>
     <li>voto: {{ dati.rating }}</li>
   </ul>
 </template>
-<style>
+<style scoped>
 li {
   list-style: none;
+}
+
+.m-5 {
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
 }
 </style>
