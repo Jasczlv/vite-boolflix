@@ -53,11 +53,16 @@ export default {
     </div>
   </div>
   <ul v-for="dati in film">
-    <img :src="`https://image.tmdb.org/t/p/w500${dati.imgPath}`" alt="" />
+    <img
+      :src="`https://image.tmdb.org/t/p/w500${dati.imgPath}`"
+      alt="immagine non trovata :("
+    />
     <li><span class="fw-bold">nome: </span> {{ dati.name }}</li>
-    <li>nome originale: {{ dati.originalName }}</li>
-    <li>lingua: {{ dati.lang }}</li>
-    <li>voto: {{ dati.rating }}</li>
+    <li>
+      <span class="fw-bold">nome originale: </span> {{ dati.originalName }}
+    </li>
+    <li><span class="fw-bold">lingua: </span> {{ dati.lang }}</li>
+    <li><span class="fw-bold">voto: </span> {{ dati.rating }}</li>
   </ul>
 </template>
 <style scoped>
