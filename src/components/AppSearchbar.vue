@@ -1,47 +1,10 @@
 <script>
-import axios from "axios";
+import { store } from "../store.js";
 export default {
   data() {
     return {
-      inputValue: "",
-      film: [],
+      store,
     };
-  },
-  methods: {
-    getApi() {
-      this.film = [];
-      axios
-        .get(
-          `https://api.themoviedb.org/3/search/movie?api_key=a9f93794d83843cad47d4bcbc4f86888&query=${this.inputValue}`
-        )
-        .then((res) => {
-          for (let i = 0; i < res.data.results.length; i++) {
-            console.log(res);
-            const data = res.data.results[i];
-            const name = data.title;
-            const originalName = data.original_title;
-            const lang = data.original_language;
-            const rating = data.vote_average;
-            const imgPath = data.backdrop_path;
-            this.film.push({
-              name,
-              originalName,
-              lang,
-              rating,
-              imgPath,
-            });
-            console.log(
-              name + ",",
-              "nome originale: " + originalName + ",",
-              "lingua: " + lang + ",",
-              "voto: " + rating
-            );
-          }
-        });
-    },
-  },
-  mounted() {
-    this.getApi();
   },
 };
 </script>
@@ -49,11 +12,11 @@ export default {
   <div class="m-5">
     <h1 class="col-auto">Boolflix</h1>
     <div>
-      <input type="text" placeholder="Cerca film" v-model="inputValue" />
-      <button @click="getApi">send</button>
+      <input type="text" placeholder="Cerca film" v-model="store.inputValue" />
+      <button @click="$emit('search')">send</button>
     </div>
 
-    <ul class="ul-style" v-for="dati in film">
+    <ul class="ul-style" v-for="dati in store.film">
       <img
         :src="`https://image.tmdb.org/t/p/w500${dati.imgPath}`"
         alt="immagine non trovata :("
