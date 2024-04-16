@@ -9,12 +9,13 @@ export default {
   },
   methods: {
     getApi() {
+      this.film = [];
       axios
         .get(
           `https://api.themoviedb.org/3/search/movie?api_key=a9f93794d83843cad47d4bcbc4f86888&query=${this.inputValue}`
         )
         .then((res) => {
-          for (let i = 0; i < 20; i++) {
+          for (let i = 0; i < res.data.results.length; i++) {
             console.log(res);
             const data = res.data.results[i];
             const name = data.title;
