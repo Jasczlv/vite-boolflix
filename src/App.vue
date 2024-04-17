@@ -20,7 +20,6 @@ export default {
         )
         .then((res) => {
           for (let i = 0; i < res.data.results.length; i++) {
-            console.log(res);
             const data = res.data.results[i];
             const name = data.title;
             const type = "Film";
@@ -28,6 +27,7 @@ export default {
             const lang = data.original_language;
             const rating = data.vote_average;
             const imgPath = data.backdrop_path;
+            const stars = Math.ceil(rating / 2);
             store.film.push({
               name,
               type,
@@ -35,6 +35,7 @@ export default {
               lang,
               rating,
               imgPath,
+              stars,
             });
           }
         });
@@ -45,7 +46,6 @@ export default {
         )
         .then((res) => {
           for (let i = 0; i < res.data.results.length; i++) {
-            console.log(res);
             const data = res.data.results[i];
             const name = data.title;
             const type = "Serie Tv";
@@ -53,6 +53,7 @@ export default {
             const lang = data.original_language;
             const rating = data.vote_average;
             const imgPath = data.backdrop_path;
+            const stars = Math.ceil(rating / 2);
             store.film.push({
               name,
               type,
@@ -60,6 +61,7 @@ export default {
               lang,
               rating,
               imgPath,
+              stars,
             });
           }
         });

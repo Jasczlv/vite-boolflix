@@ -29,7 +29,7 @@ export default {
         <span :class="'fi-' + (dati.lang === 'en' ? 'gb' : dati.lang)"></span>
       </div>
     </li>
-    <li><span class="fw-bold">voto: </span> {{ dati.rating }}</li>
+    <li><span class="fw-bold">voto: </span> {{ dati.stars + " stelle" }}</li>
   </ul>
 </template>
 <style>
