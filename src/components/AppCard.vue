@@ -9,6 +9,7 @@ export default {
   },
 };
 </script>
+
 <template>
   <ul class="ul-style" v-for="dati in store.film">
     <img
@@ -19,8 +20,9 @@ export default {
       <span class="fw-bold">{{ dati.type }} </span>
     </li>
     <li><span class="fw-bold">nome: </span> {{ dati.name }}</li>
-    <li>
-      <span class="fw-bold">nome originale: </span> {{ dati.originalName }}
+    <li v-if="dati.originalName !== dati.name ? true : false">
+      <span class="fw-bold">nome originale: </span>
+      {{ dati.originalName === dati.name ? "" : dati.originalName }}
     </li>
     <li class="language-li">
       <div>
@@ -29,9 +31,15 @@ export default {
         <span :class="'fi-' + (dati.lang === 'en' ? 'gb' : dati.lang)"></span>
       </div>
     </li>
-    <li><span class="fw-bold">voto: </span> {{ dati.stars + " stelle" }}</li>
+    <li class="fw-bold">
+      voto:
+      <span v-for="(stella, i) in dati.stars">
+        <font-awesome-icon :icon="['fas', 'star']" />
+      </span>
+    </li>
   </ul>
 </template>
+
 <style>
 li {
   list-style: none;
@@ -41,15 +49,16 @@ li {
   display: inline-block;
   width: 30px;
   aspect-ratio: 3 / 2; /* Aspect ratio di 3:2 */
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
 }
 
 .ul-style {
+  color: white;
   max-width: 600px;
   border: 0.5px solid rgba(0, 0, 0, 0.374);
   padding: 50px;
-  background-color: rgba(169, 169, 169, 0.249);
+  background-color: rgba(0, 0, 0, 0.714);
 }
 </style>
