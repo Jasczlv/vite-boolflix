@@ -1,10 +1,6 @@
 <script>
 import { store } from "../store.js";
-import AppCard from "./AppCard.vue";
 export default {
-  components: {
-    AppCard,
-  },
   data() {
     return {
       store,
@@ -13,22 +9,36 @@ export default {
 };
 </script>
 <template>
-  <div class="m-5">
-    <h1 class="col-auto">Boolflix</h1>
-    <div>
+  <div class="container-searchbar p-3">
+    <h1 class="col-auto main-title">Boolflix</h1>
+    <div class="d-flex align-content-center">
       <input
+        class="searchbar"
         type="text"
         placeholder="Cerca film"
         v-model="store.inputValue"
         @keydown.enter="$emit('search')"
       />
-      <button @click="$emit('search')">Cerca</button>
+      <button class="btn btn-sm" @click="$emit('search')">Cerca</button>
     </div>
-    <AppCard />
   </div>
 </template>
 <style scoped>
-.m-5 {
+.main-title {
+  color: red;
+  font-weight: bold;
+}
+
+.searchbar {
+  background-color: rgba(240, 248, 255, 0.93);
+}
+
+.btn {
+  background-color: gray;
+}
+
+.container-searchbar {
+  background-color: rgba(0, 0, 0, 0.644);
   max-width: 100%;
   display: flex;
   flex-direction: column;
@@ -38,7 +48,7 @@ export default {
   justify-content: center;
 }
 
-.m-5 > * {
+.container-searchbar > * {
   margin-bottom: 15px;
 }
 </style>

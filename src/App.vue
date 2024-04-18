@@ -1,10 +1,12 @@
 <script>
 import AppSearchbar from "./components/AppSearchbar.vue";
+import AppCard from "./components/AppCard.vue";
 import { store } from "./store.js";
 import axios from "axios";
 export default {
   components: {
     AppSearchbar,
+    AppCard,
   },
   data() {
     return {
@@ -28,6 +30,7 @@ export default {
             const rating = data.vote_average;
             const imgPath = data.backdrop_path;
             const stars = Math.ceil(rating / 2);
+            const emptyStars = 5 - stars;
             store.film.push({
               name,
               type,
@@ -36,6 +39,7 @@ export default {
               rating,
               imgPath,
               stars,
+              emptyStars,
             });
           }
         });
@@ -52,8 +56,9 @@ export default {
             const originalName = data.original_title;
             const lang = data.original_language;
             const rating = data.vote_average;
-            const imgPath = data.backdrop_path;
+            const imgPath = data.poster_path;
             const stars = Math.ceil(rating / 2);
+            const emptyStars = Math.floor(5 - rating / 2);
             store.film.push({
               name,
               type,
@@ -62,6 +67,7 @@ export default {
               rating,
               imgPath,
               stars,
+              emptyStars,
             });
           }
         });
@@ -71,5 +77,6 @@ export default {
 </script>
 <template>
   <AppSearchbar @search="getApi" />
+  <AppCard />
 </template>
 <style></style>
